@@ -8,6 +8,10 @@
 			body,html{margin: 0;padding: 0;overflow: hidden;background-color: black;position: relative;height: 100%;}
 			body{background-image: url(img/asteroids_meteorids.png);}
 			div{position: absolute;margin:auto;transform: translate(-50%, -50%);left:50%;top:50%;-webkit-transform-style: preserve-3d;border-radius:50% ;}
+			.track{z-index: 999;top: 10%;left: 10%;}
+			.track button{font-size: 16px;cursor: pointer;}
+			.tips{z-index: 999;top: 15%;left: 10%;color: #F7C672;}
+			
 			.uni{transform: perspective(1000px) rotateY(-20deg) rotateX(50deg);}
 			.uni>div:nth-child(1){transform: rotateX(-10deg) rotateY(20deg);}
 			.uni>div:nth-child(2){transform: rotateX(30deg) rotateY(-10deg);}
@@ -16,7 +20,8 @@
 			.uni>div:nth-child(5){transform: rotateX(-60deg) rotateY(10deg);}
 			.uni>div:nth-child(7){transform: rotateX(-12deg) rotateY(10deg);}
 			.uni>div:nth-child(8){transform: rotateX(27deg) rotateY(-73deg);}
-			.uni div div{-webkit-animation-timing-function: linear;-webkit-animation-iteration-count: infinite;-webkit-animation-name: rotate;/*border: 1px solid #ddd;*/}
+			.uni div div{-webkit-animation-timing-function: linear;-webkit-animation-iteration-count: infinite;-webkit-animation-name: rotate;}
+			.moveTrack{border: 1px solid #ddd;}
 			.uni div div:not(.Sun)>div:not(.moon){border: 1px solid #ddd;}
 			
 			.Neptune{height: 880px;width: 880px;-webkit-animation-duration: 20s;}
@@ -74,6 +79,12 @@
 		<script src="./jquery/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
+		<div class="track">
+			<button>显示/隐藏 公转轨道</button>
+		</div>
+		<div class="tips">
+			<span>可拖动屏幕变换角度</span>
+		</div>
 		<div class="uni">
 			<div>
 				<div class="Neptune">
@@ -125,7 +136,8 @@
 				
 		</div>
 		<script type="text/javascript">
-			window.onload = function(){
+			
+			$(function(){
 				var disX = 50;
 				var disY = -20;
 				var left = null;
@@ -211,9 +223,8 @@
 				ball(sat);
 				ball(ura);
 				ball(nep);
-			}
-			
-			$(function(){
+				
+				
 				var disX = 50;
 				var disY = -20;
 				var left = null;
@@ -241,9 +252,10 @@
 						top = mtop;
 					})
 				})
-//				.on(touchend,function(){
-//					
-//				})
+				
+				$('button').click(function(){
+					$('.uni div div').toggleClass('moveTrack');
+				})
 			})
 			
 		</script>
